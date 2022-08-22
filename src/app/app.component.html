@@ -60,7 +60,11 @@
                 </td>
                 <button
                   class="btn"
-                  *ngIf="report.key != 'sampleCollectionDate'"
+                  *ngIf="
+                    report.key != 'sampleCollectionDate' &&
+                    report.value &&
+                    !currentLab.reports.chem7[report.key]
+                  "
                   (click)="updateCurrentLabs(report.key, report.value)"
                 >
                   Add
