@@ -35,7 +35,7 @@ export class AppComponent {
           Sodium: 100,
           Chloride: null,
           BUN: null,
-          Glucose: null,
+          Glucose: 89,
           Potassium: null,
           Bicarb: null,
           Creatinine: null,
