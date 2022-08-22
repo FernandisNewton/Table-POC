@@ -1,4 +1,5 @@
 import { Component, Pipe, PipeTransform } from '@angular/core';
+import { Chem7, ILab } from './lab.interface';
 
 @Pipe({ name: 'keyValueUnsorted', pure: false })
 export class KeyValuePipe implements PipeTransform {
@@ -21,13 +22,13 @@ export class KeyValuePipe implements PipeTransform {
 export class AppComponent {
   title = 'poc';
 
-  newValue?: number;
+  newValue?: any;
 
   constructor() {
     this.currentLab = JSON.parse(JSON.stringify(this.incomingLabs[0]));
   }
 
-  incomingLabs = [
+  incomingLabs: ILab[] = [
     {
       reports: {
         chem7: {
@@ -40,7 +41,7 @@ export class AppComponent {
           Bicarb: null,
           Creatinine: null,
           eGFR: null,
-        } as Record<string, any>,
+        },
       },
     },
     {
@@ -75,10 +76,10 @@ export class AppComponent {
     },
   ];
 
-  currentLab: any;
+  currentLab: ILab;
 
-  updateCurrentLabs(key: string, value: any) {
+  updateCurrentLabs(key: keyof Chem7, value: any) {
     this.currentLab.reports.chem7[key] = value;
-    this.currentLab.reports.chem7.sampleCollectionDate = null;
+    this.currentLab['reports'].chem7.sampleCollectionDate = null;
   }
 }

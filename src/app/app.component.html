@@ -13,7 +13,7 @@
           <td>&nbsp;</td>
           <th>
             <input
-              [value]="currentLab.reports.chem7.sampleCollectionDate"
+              [value]="currentLab['reports'].chem7.sampleCollectionDate"
               type="date"
             />
           </th>
@@ -21,15 +21,31 @@
       </thead>
       <tbody>
         <ng-container
-          *ngFor="let item of currentLab?.reports?.chem7 | keyvalue"
+          *ngFor="let item of currentLab['reports'].chem7 | keyvalue"
         >
           <tr *ngIf="item.key != 'sampleCollectionDate'">
             <td>{{ item.key }} (mEq/L)</td>
-            <td>
-              <ng-container *ngIf="item.value">
+            <td *ngIf="item.key as _key">
+              <ng-container
+                *ngIf="
+                  item.value && incomingLabs[0].reports.chem7[_key];
+                  else prefilledInput
+                "
+              >
                 {{ item.value }}
               </ng-container>
-              <ng-container *ngIf="!item.value">
+              <ng-template #prefilledInput>
+                <input
+                  [value]="item.value"
+                  type="number"
+                  placeholder="Example 100"
+                  name=""
+                  id=""
+                />
+              </ng-template>
+              <ng-container
+                *ngIf="!item.value && incomingLabs[0].reports.chem7[_key]"
+              >
                 <input type="number" placeholder="Example 100" name="" id="" />
               </ng-container>
             </td>
