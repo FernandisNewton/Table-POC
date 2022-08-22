@@ -43,7 +43,7 @@
         <td>
           <thead>
             <th>
-              {{ lab.reports.chem7.sampleCollectionDate }}
+              {{ lab.reports.chem7["sampleCollectionDate"] }}
             </th>
           </thead>
           <tbody>
@@ -58,12 +58,13 @@
                   </ng-container>
                   <ng-container *ngIf="!report.value"> -- </ng-container>
                 </td>
+
                 <button
                   class="btn"
                   *ngIf="
                     report.key != 'sampleCollectionDate' &&
                     report.value &&
-                    !currentLab.reports.chem7[report.key]
+                    !incomingLabs[0].reports.chem7[report.key]
                   "
                   (click)="updateCurrentLabs(report.key, report.value)"
                 >

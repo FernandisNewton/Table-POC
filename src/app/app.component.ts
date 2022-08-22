@@ -40,7 +40,7 @@ export class AppComponent {
           Bicarb: null,
           Creatinine: null,
           eGFR: null,
-        },
+        } as Record<string, any>,
       },
     },
     {
